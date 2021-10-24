@@ -1,7 +1,4 @@
-import org.apache.poi.ss.formula.functions.T;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class DocX {
@@ -37,7 +34,7 @@ public class DocX {
         menuBar.add(fileMenu);
         menuBar.add(reports);
         menuBar.add(admin);
-        tableExcel = new JTable(65, 65) {
+        tableExcel = new JTable(150, 65) {
             public boolean getScrollableTracksViewportWidth() {
                 return getPreferredSize().width < getParent().getWidth();
             }
@@ -60,7 +57,6 @@ public class DocX {
         panel.add(panelForExcel);
         panel.add("Center", jScrollPane);
     }
-
 
 
     private void run() {

@@ -12,7 +12,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.*;
@@ -113,7 +112,7 @@ public class workWithFile {
 
     private void writeCSVFile() {
         try {
-            PrintWriter printWriter = new PrintWriter(new File(String.valueOf(this.file)), "Cp1251");
+            PrintWriter printWriter = new PrintWriter(String.valueOf(this.file), "Cp1251");
             Object[][] data = getTableData();
             StringBuilder builder = new StringBuilder();
             for (Object[] datum : data) {
@@ -263,9 +262,8 @@ public class workWithFile {
         parent.panelForExcel.setVisible(true);
         ArrayList<ArrayList<String>> data = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) parent.tableExcel.getModel();
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader br = new BufferedReader( new InputStreamReader(new FileInputStream(file.toString()), "Cp1251"))) {
             String line;
-            String ls = System.getProperty("line.separator");
             while ((line = br.readLine()) != null) {
                 ArrayList<String> subData = new ArrayList<>(Arrays.asList(line.split("\\,")));
                 data.add(subData);
